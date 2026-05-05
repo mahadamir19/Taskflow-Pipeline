@@ -283,13 +283,13 @@ It shows GitHub, App Service, Durable Function, AKS, ACI, Blob Storage, ACR, and
 ### Question 8.2: Service Selection
 
 App Service
-TaskFlow uses App Service to host the frontend web interface because it provides a fully managed Platform-as-a-Service (PaaS) environment optimized for web applications. It abstracts away underlying server maintenance and provides built-in HTTPS, load balancing, and scaling. This allows the system to reliably serve the HTML/JS frontend to users without requiring infrastructure management.
+The PA uses App Service to host the frontend web interface because it provides a fully managed environment optimized for web applications. It abstracts away underlying server maintenance and provides built-in HTTPS, load balancing, and scaling. This allows the system to reliably serve the frontend to users without requiring infrastructure management.
 
 Durable Functions
-Durable Functions acts as the central stateful orchestrator for the backend workflow. It allows the system to reliably coordinate asynchronous API calls (AKS validation and ACI provisioning) while automatically managing execution state and retries. Because it is serverless, it can "sleep" while waiting for the ACI job to finish without consuming active compute resources or holding open HTTP connections.
+Durable Functions acts as the central stateful orchestrator for the backend workflow. It allows the system to reliably coordinate API calls (AKS validation and ACI provisioning) while automatically managing execution state and retries. Because it is serverless, it can "sleep" while waiting for the ACI job to finish without consuming active compute resources.
 
 AKS (Azure Kubernetes Service)
-AKS is utilized for the order validation microservice because it provides an always-on, highly available environment. The validator requires continuous uptime and instant response capabilities to process incoming HTTP requests from the orchestrator without cold starts. Kubernetes allows this API to be resilient and easily scalable if validation traffic spikes.
+AKS is utilized for the order validation service because it provides an always-on, highly available environment. The validator requires continuous uptime and instant response capabilities to process incoming HTTP requests from the orchestrator without cold starts. Kubernetes allows this API to be resilient and easily scalable if validation traffic spikes.
 
 ACI (Azure Container Instances)
 ACI is used for the PDF report generation because it is perfectly suited for ephemeral, isolated batch jobs. Instead of running a heavy reporting container 24/7, ACI allows the orchestrator to dynamically spin up compute on-demand strictly for the duration of the PDF rendering. Once the file is uploaded to blob storage, the container terminates, ensuring resources are freed immediately.
@@ -322,7 +322,8 @@ Description: The most expensive resource in the deployment is the Azure Kubernet
 Challenge 1: Azure Policy Deadlock with Storage Authentication
 During the implementation of the report_activity, the ACI container repeatedly failed to upload the generated PDF to Blob Storage. Initially, attempting to authenticate using the storage account connection string resulted in a KeyBasedAuthenticationNotPermitted error because the university's Azure Policy strictly disables Shared Key access. I then attempted to use a Managed Identity, but hit a secondary policy block: my student subscription lacked the RBAC permissions (User Access Administrator) required to assign the Storage Blob Data Contributor role to the identity.
 
-Resolution: To debug and bypass this policy deadlock, I pivoted to using a User Delegation SAS token. I utilized the Azure CLI (az storage container generate-sas --as-user) to generate a temporary SAS token, which already had the necessary data plane permissions. I then injected this SAS_TOKEN and the STORAGE_ACCOUNT_URL into the ACI as environment variables, allowing the containerized Python script to securely authenticate and write the PDF.
+Resolution: To debug, I used a User Delegation SAS token. I utilized the Azure CLI (az storage container generate-sas --as-user) to generate a temporary SAS token, which already had the necessary permissions. I then injected this SAS_TOKEN and the STORAGE_ACCOUNT_URL into the ACI as environment variables, allowing the containerized Python script to securely authenticate and write the PDF.
+
 Challenge 2: Durable Functions Route Registration Failure (404 Cannot POST)
 While wiring the frontend to the backend orchestrator, the Web App consistently returned a Cannot POST /api/orchestrators/my_orchestrator (404 Not Found) error. This indicated that the Azure Functions host was up, but the specific route didn't exist.
 
