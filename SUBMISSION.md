@@ -314,6 +314,7 @@ State and Control Flow Management: Coordinating a multi-step workflow using plai
 ### Question 8.5: Cost Review
 
 ![rg](docs/resource_group.png)
+<img width="1919" height="854" alt="image" src="https://github.com/user-attachments/assets/a1ee735a-2c78-4feb-a2c4-bd957d030337" />
 
 Description: The most expensive resource in the deployment is the Azure Kubernetes Service (AKS) node pool. This is because AKS requires dedicated, always-on Virtual Machines to run the Kubernetes control plane components and the worker nodes hosting the validator pods. Unlike the serverless resources (Durable Functions, ACI) which only bill per execution, or the basic App Service plan, the AKS nodes incur continuous hourly compute compute charges 24/7, regardless of how much traffic the system is actually handling.
 
