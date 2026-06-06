@@ -1,36 +1,10 @@
 <div align="center">
 
-# PA4 Submission: TaskFlow Pipeline
-
-<img alt="GitHub only" src="https://img.shields.io/badge/Submit-GitHub%20URL%20Only-10b981?style=for-the-badge">
-<img alt="Total points" src="https://img.shields.io/badge/Total-100%20points-7c3aed?style=for-the-badge">
-
-</div>
-
-<div style="background:#f5f3ff;color:#111827;border-left:6px solid #6330bc;padding:14px 18px;border-radius:10px;margin:18px 0;">
-Copy this file to <code style="color:#111827;background:#ddd6fe;padding:2px 4px;border-radius:4px;">SUBMISSION.md</code>. Put every screenshot in <code style="color:#111827;background:#ddd6fe;padding:2px 4px;border-radius:4px;">docs/</code>, embed it under the correct task, and write a short description below each image explaining what it proves. The grader should not need any file outside this repository.
-</div>
-
-## Student Information
-
-| Field | Value |
-|---|---|
-| Name | Mahad Amir |
-| Roll Number | 27100289 |
-| GitHub Repository URL | https://github.com/mahadamir19/CS487-PA4 |
-| Resource Group | `rg-sp26-27100289` |
-| Assigned Region | `ukwest` |
-
-## Evidence Rules
-
-- Use relative image paths, for example: `![AKS nodes](docs/aks-nodes.png)`.
-- Every image must have a 1-3 sentence description below it.
-- Azure Portal screenshots must show the resource name and enough page context to identify the service.
-- CLI screenshots must show the command and output.
-- Mask secrets such as function keys, ACR passwords, and storage connection strings.
+# TaskFlow Pipeline
+## By Mahad Amir
 
 
-## Task 1: App Service Web App (15 points)
+## Task 1: App Service Web App
 
 ### Evidence 1.1: Forked Repository
 
@@ -70,7 +44,7 @@ Description: This verifies the configuration of the FUNCTION_START_URL and FUNCT
 
 ---
 
-## Task 2: Azure Container Registry (15 points)
+## Task 2: Azure Container Registry
 
 ### Evidence 2.1: ACR Overview
 
@@ -107,7 +81,7 @@ Description: This screenshot confirms that all three required container reposito
 
 ---
 
-## Task 3: Durable Function Implementation (12 points)
+## Task 3: Durable Function Implementation
 
 ### Evidence 3.1: Completed Function Code
 
@@ -123,7 +97,7 @@ Description: This screenshot verifies that the local Azure Functions Core Tools 
 
 ---
 
-## Task 4: Function App Container Deployment (8 points)
+## Task 4: Function App Container Deployment
 
 ![error](docs/error.png)
 There was a naming conflict for the function app so I named to to pa4-func-27100289
@@ -154,7 +128,7 @@ Description: This failure is expected at this stage because the orchestration su
 
 ---
 
-## Task 5: AKS Validator (15 points)
+## Task 5: AKS Validator
 
 ### Evidence 5.1: Kubernetes Nodes
 
@@ -189,7 +163,7 @@ Description: This shows the Function App's configuration updated with the VALIDA
 
 ---
 
-## Task 6: ACI Report Job (15 points)
+## Task 6: ACI Report Job
 
 ### Evidence 6.1: Blob Container
 
@@ -236,7 +210,7 @@ Application Context: (ORDER_ID, ORDER_JSON) provides the specific business data 
 
 ---
 
-## Task 7: End-to-End Pipeline (15 points)
+## Task 7: End-to-End Pipeline
 
 ### Evidence 7.1: Web App Wiring
 
@@ -272,7 +246,7 @@ Description: This sequence demonstrates the orchestrator's short-circuit logic. 
 
 ---
 
-## Task 8: Write-up and Architecture Diagram (5 points)
+## Task 8: Write-up and Architecture Diagram
 
 ### Evidence 8.1: Architecture Diagram
 
